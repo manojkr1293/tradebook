@@ -1,13 +1,13 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 
 export const fetchJournal = createAsyncThunk('fetchJournal', async () => {
-  const response = await fetch('http://localhost:3000/api/journal')
+  const response = await fetch(`${NEXT_PUBLIC_API_URL}api/journal`)
   return response.json();
 })
 
 export const addNewJournal = createAsyncThunk('addNewJournal', async(initialPost)=>{
   
-  let response = await fetch(`http://localhost:3000/api/journal`,{
+  let response = await fetch(`${NEXT_PUBLIC_API_URL}api/journal`,{
     method:"post",
     body:JSON.stringify({stock_name:initialPost.filterOption,time_frame:initialPost.timeframe,trades_tatus:initialPost.tradestatus,buying_date:initialPost.buyDate,selling_date:initialPost.sellDate,buying_price:initialPost.buyPrice,selling_price:initialPost.sellPrice,stop_loss:initialPost.stoploss,quantity:initialPost.quantity,strategy:initialPost.strategy,reason:initialPost.reason,notes:initialPost.notes})
   })
