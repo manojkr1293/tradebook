@@ -8,7 +8,8 @@ const Login = (props) =>{
   const router = useRouter();
 
   const handleLogin = async() =>{
-    let response = await fetch(`${NEXT_PUBLIC_API_URL}api/auth`,{
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+    let response = await fetch(`${apiUrl}api/auth`,{
       method:'POST',
       body:JSON.stringify({username,password,isLogin:true})
     })
