@@ -9,6 +9,7 @@ export async function GET(){
 }
 export async function POST(request){
   let payload = await request.json();
+  
   let result;
   let success = false;
   await mongoose.connect(process.env.MONGODB_URI);

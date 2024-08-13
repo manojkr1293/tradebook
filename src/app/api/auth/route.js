@@ -13,7 +13,7 @@ export async function POST(request){
   let result;
   let success = false;
   await mongoose.connect(process.env.MONGODB_URI);
-
+  
   if(payload.isLogin){
     result = await authSchema.findOne({email:payload.username,password:payload.password});
     if(result){

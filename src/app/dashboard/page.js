@@ -59,55 +59,47 @@ const Dashboard = () =>{
     <>
     <Header/>
     <section className="my-10 mx-auto container">
-      <div className="border rounded p-5 bg-white shadow-sm">
+      <div className="border rounded-md p-5 bg-[#D9EEE1] shadow-md">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-gray-800 font-semibold text-3xl">Overview</h1>
-            <p className="text-gray-400 text-sm py-2">
+            <h1 className="text-green-950 font-extrabold text-5xl">Overview</h1>
+            <p className="text-green-950 text-sm py-2 text-center font-medium">
               Markets & Your Investments
             </p>
           </div>
           <div className="flex justify-end">
             <div className="grid grid-cols-3 gap-5">
               <div className="text-center">
-                <h3 className="text-xl text-gray-400">Trade Taken</h3>
-                <div
-                  className="flex justify-center items-center mt-5"
+                
+               <div
+                  className="flex justify-center items-center"
                   onClick={handleTotalStocks}
                 >
-                  <span className="w-20 h-20 rounded-full bg-blue-300 font-bold flex justify-center items-center">
-                    <button className="w-16 h-16 rounded-full bg-blue-500 text-5xl text-gray-100 shadow-lg shadow-gray-700 focus:bg-gray-600 focus:text-gray-200">
-                      {stocksLists ? stocksLists.length :0}
-                    </button>
-                  </span>
+                   <button className="text-green-950 font-extrabold text-8xl">{stocksLists ? stocksLists.length :0}</button>
                 </div>
+                <h3 className="text-sm text-green-950 font-medium">Trade Taken</h3>
               </div>
               <div className="text-center">
-                <h3 className="text-xl text-gray-400">Trade In Profit</h3>
+                
                 <div
-                  className="flex justify-center items-center mt-5"
+                  className="flex justify-center items-center"
                   onClick={handleprofitStocks}
                 >
-                  <span className="w-20 h-20 rounded-full bg-green-300 font-bold flex justify-center items-center">
-                    <button className="w-16 h-16 rounded-full bg-green-500 text-5xl text-gray-100 shadow-lg shadow-gray-700 focus:bg-gray-600 focus:text-gray-200 ">
-                      {profitCount}
-                    </button>
-                  </span>
+                  <button className="text-green-950 font-extrabold text-8xl">{profitCount}</button>
+                 
                 </div>
+                <h3 className="text-sm text-green-950 font-medium">Trade In Profit</h3>
               </div>
 
               <div className="text-center">
-                <h3 className="text-xl text-gray-400">Trade In Loss</h3>
+                
                 <div
-                  className="flex justify-center items-center mt-5"
+                  className="flex justify-center items-center"
                   onClick={handleLossMakingStocks}
                 >
-                  <span className="w-20 h-20 rounded-full bg-red-300 font-bold flex justify-center items-center">
-                    <button className="w-16 h-16 rounded-full bg-red-500 text-5xl text-gray-100 shadow-lg shadow-gray-700 focus:bg-gray-600 focus:text-gray-200 ">
-                      {lossCount}
-                    </button>
-                  </span>
+                  <button className="text-green-950 font-extrabold text-8xl">{lossCount}</button>
                 </div>
+                <h3 className="text-sm text-green-950 font-medium">Trade In Loss</h3>
               </div>
             </div>
           </div>

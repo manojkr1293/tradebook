@@ -12,7 +12,9 @@ const journalModel = new mongoose.Schema({
   stop_loss:String,
   quantity:String,
   strategy:String,
-  reason:String
+  reason:String,
+  create_date:String,
+  user_id:mongoose.Schema.Types.ObjectId
 });
 
 export const journalSchema = mongoose.models.tradebooks || mongoose.model("tradebooks",journalModel);

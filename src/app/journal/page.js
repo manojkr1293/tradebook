@@ -25,7 +25,7 @@ const Journal = () =>{
     reason: "",
     notes: "",
   };
-
+  
   const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -314,8 +314,23 @@ const Journal = () =>{
 
     if (validateForm()) {
       // Submit the form
-      console.log("Form submitted", formattedValues);
-      dispatch(addNewJournal(formattedValues));
+      
+
+      const today = new Date();
+      const day = String(today.getDate()).padStart(2, '0');
+      const month = String(today.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+      const year = today.getFullYear();
+      const formattedDate = `${day}-${month}-${year}`;
+      const authUser = JSON.parse(localStorage.getItem('authUser'));
+    
+      // Update the formData with the current date
+      const updatedData = {
+          ...formattedValues,
+          createDate: formattedDate,
+          userid:authUser._id
+      };
+
+      dispatch(addNewJournal(updatedData));
       //dispatch(journalAction.addToJournal(formattedValues));
       setFormValues(initialFormValues);
       setErrors({});

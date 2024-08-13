@@ -1,5 +1,8 @@
+import React, { useMemo, useState } from "react";
+
+
 const InvestmentTable = ({ stockInvestedlists }) => {
-  console.log(stockInvestedlists);
+
   const calculateProfitLossPercentage = (purchase, sell) => {
     if (sell && purchase) {
       const profitLoss = sell - purchase;
@@ -26,37 +29,44 @@ const InvestmentTable = ({ stockInvestedlists }) => {
   }
   return (
     <>
-      <table className="table-auto border-collapse text-sm w-full border rounded mt-5">
+      <table className="table-auto border-collapse w-full border rounded mt-5">
         <thead>
           <tr className="border-b">
-            <th className="p-3 text-left border">Stock Name</th>
-            <th className="p-3 text-left border">Buying Price</th>
-            <th className="p-3 text-left border">Selling Price</th>
-            <th className="p-3 text-left border">Date Of Purchase</th>
-            <th className="p-3 text-left border">Date Of Selling</th>
-            <th className="p-3 text-left border">% Profit/Loss</th>
+            <th className="p-3 text-left border-2 text-sm text-gray-700">
+            <button
+              type="button"
+              
+            >
+              Stock Name
+            </button>
+              </th>
+            <th className="p-3 text-left border-2 text-sm text-gray-700">Buying Price</th>
+            <th className="p-3 text-left border-2 text-sm text-gray-700">Selling Price</th>
+            <th className="p-3 text-left border-2 text-sm text-gray-700">Date Of Purchase</th>
+            <th className="p-3 text-left border-2 text-sm text-gray-700">Date Of Selling</th>
+            <th className="p-3 text-left border-2 text-sm text-gray-700">% Profit/Loss</th>
           </tr>
         </thead>
         <tbody>
           {stockInvestedlists.map((stocks, index) => (
           
             <tr key={index}>
-              <td className="p-3 border text-gray-700 text-sm font-semibold">
+              <td className="p-3 border-2 text-gray-900 text-md font-bold">
                 {stocks.stock_name}
               </td>
-              <td className="p-3 border  text-gray-700 text-sm font-semibold">
+              <td className="p-3 border-2  text-gray-900 text-md font-bold">
                 {stocks.buying_price}
               </td>
-              <td className="p-3 border  text-gray-700 text-sm font-semibold">
+              <td className="p-3 border-2  text-gray-900 text-md font-bold">
                 {stocks.selling_price && stocks.selling_price}
               </td>
-              <td className="p-3 border  text-gray-700 text-sm font-semibold">
+              <td className="p-3 border-2  text-gray-900 text-md font-bold">
                 {stocks.buying_date}
               </td>
-              <td className="p-3 border  text-gray-700 text-sm font-semibold">
+              <td className="p-3 border-2  text-gray-900 text-md font-bold">
                 {stocks.selling_date && stocks.selling_date}
               </td>
-              <td className="p-3 border  text-gray-700 text-sm font-semibold">
+              <td className="p-3 border-2  text-gray-900 text-md font-bold">
                 {calculateProfitLossPercentage(
                   stocks.buying_price,
                   stocks.selling_price
