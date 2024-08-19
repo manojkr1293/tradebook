@@ -7,6 +7,7 @@ import { fetchJournal } from "../redux/journalSlice";
 
 const Dashboard = () =>{
   const stocksLists = useSelector((state) => state.journal.journalsApiData.result);
+  
   const [stocksitems, setStocks] = useState();
   
   const dispatch = useDispatch();

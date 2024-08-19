@@ -324,7 +324,7 @@ const Journal = () =>{
       const authUser = JSON.parse(localStorage.getItem('authUser'));
     
       // Update the formData with the current date
-      const updatedData = {
+        const updatedData = {
           ...formattedValues,
           createDate: formattedDate,
           userid:authUser._id

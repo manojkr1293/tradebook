@@ -1,12 +1,17 @@
+
+import { useRouter } from "next/navigation";
 import React, { useEffect, useMemo, useState } from "react";
+import Profitloss from "./profitloss";
 
 const Shortingtable = ({initialData = [] }) =>{
-    const [data, setData] = useState(initialData);
-
-    useEffect(()=>{
-      setData(initialData);
-    },[initialData])
-    
+  const [data, setData] = useState(initialData);
+  const router = useRouter();
+  useEffect(() => {
+      // Update only if initialData has actually changed
+      if (JSON.stringify(initialData) !== JSON.stringify(data)) {
+          setData(initialData);
+      }
+  }, [initialData, data]);
     const [sortConfig, setSortConfig] = useState({ key: 'stock_name', direction: 'asc' });
 
     // Function to handle column header clicks
@@ -35,27 +40,11 @@ const Shortingtable = ({initialData = [] }) =>{
         return sortableItems;
     }, [data, sortConfig]);
 
-    const calculateProfitLossPercentage = (purchase, sell) => {
-      if (sell && purchase) {
-        const profitLoss = sell - purchase;
-        const percentage = (profitLoss / purchase) * 100;
   
-        if (percentage > 0) {
-          return (
-            <>
-              <span className="text-green-800">{percentage.toFixed(2)}</span>
-            </>
-          );
-        } else {
-          return (
-            <>
-              <span className="text-red-800">{percentage.toFixed(2)}</span>
-            </>
-          );
-        }
-      }
-    };
 
+    const stockview = (id) =>{
+      router.push('journal/'+id);
+    }
     return (
         <div>
           
@@ -89,7 +78,7 @@ const Shortingtable = ({initialData = [] }) =>{
                     {sortedData.length > 0 ? (
                         sortedData.map(item => (
                             <tr key={item._id}>
-                                <td className="p-3 border-2 text-gray-900 text-md font-bold">{item.stock_name}</td>
+                                <td className="p-3 border-2 text-gray-900 text-md font-bold" onClick={(e)=>stockview(item._id)}>{item.stock_name}</td>
                                 
                                 <td className="p-3 border-2 text-gray-900 text-md font-bold">{item.buying_date}</td>
                                 <td className="p-3 border-2 text-gray-900 text-md font-bold">{item.selling_date}</td>
@@ -97,10 +86,7 @@ const Shortingtable = ({initialData = [] }) =>{
                                 <td className="p-3 border-2 text-gray-900 text-md font-bold">{item.selling_price}</td>
                                 <td className="p-3 border-2 text-gray-900 text-md font-bold">{item.quantity}</td>
                                 <td className="p-3 border-2  text-gray-900 text-md font-bold">
-                {calculateProfitLossPercentage(
-                  item.buying_price,
-                  item.selling_price
-                )}
+                                  <Profitloss buyprice = {item.buying_price} sellprice={item.selling_price}/>
               </td>
                             </tr>
                         ))

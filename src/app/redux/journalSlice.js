@@ -2,14 +2,21 @@ import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 
 export const fetchJournal = createAsyncThunk('fetchJournal', async () => {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-  const authuser = JSON.stringify(localStorage.getItem('authuser'));
-  console.log(authuser);
-  const response = await fetch(`${apiUrl}api/journal`)
+  let authuserId = JSON.parse(localStorage.getItem('authUser'))._id;
+  
+  const response = await fetch(`${apiUrl}api/journal/${authuserId}`)
+  return response.json();
+})
+
+export const fetchSingleJournal = createAsyncThunk('fetchSingleJournal', async (journalId) => {
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  console.log(journalId);
+  const response = await fetch(`${apiUrl}api/journal/view/${journalId}`)
   return response.json();
 })
 
 export const addNewJournal = createAsyncThunk('addNewJournal', async(initialPost)=>{
-  console.log(initialPost);
+  console.log('initialPost', initialPost);
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   let response = await fetch(`${apiUrl}api/journal`,{
     method:"post",
@@ -25,6 +32,7 @@ export const addNewJournal = createAsyncThunk('addNewJournal', async(initialPost
 const initialState = {
   journals: [],
   journalsApiData:[],
+  journalItems: [],
   status: 'idle',
   error: null,
 }
@@ -40,20 +48,23 @@ const journalSlice = createSlice({
       console.log("journal",action.payload);
       state.journals.push(action.payload);
     },
+    
   },
   extraReducers: builder => {
     builder
       
-      .addCase(fetchJournal.pending, (state, action) => {
-        state.status = 'pending'
-      })
+    .addCase(fetchSingleJournal.fulfilled, (state, action) => {
+       
+      state.status = 'succeeded'
+      state.journalItems = action.payload
+    })
       .addCase(fetchJournal.fulfilled, (state, action) => {
        
         state.status = 'succeeded'
         state.journalsApiData = action.payload
       })
       .addCase(addNewJournal.fulfilled, (state, action) => {
-        console.log('reducer')
+        
         state.status = 'succeeded'
         state.journals.push(action.payload)
       })
