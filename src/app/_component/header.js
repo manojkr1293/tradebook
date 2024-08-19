@@ -38,8 +38,8 @@ const Header = () =>{
             <Link href="/" className="hover:bg-[#D9EEE1] hover:text-green-950  px-3 py-5">Contacts</Link>
             {isLogedin ? 
             <>
-              <Link href="dashboard" className="hover:bg-[#D9EEE1] hover:text-green-950  px-3 py-5">Dashboard</Link>
-              <Link href="journal" className="hover:bg-[#D9EEE1] hover:text-green-950  px-3 py-5">Add Journal</Link> 
+              <Link href="/dashboard" className="hover:bg-[#D9EEE1] hover:text-green-950  px-3 py-5">Dashboard</Link>
+              <Link href="/journal" className="hover:bg-[#D9EEE1] hover:text-green-950  px-3 py-5">Add Journal</Link> 
               <button className="hover:bg-[#D9EEE1] hover:text-green-950 px-3 py-5" onClick={hanldeLogout}>Logout</button> 
             </> : <><Link href="auth" className="hover:bg-[#D9EEE1] hover:text-green-950  px-3 py-5">Log In</Link><button>Sign Up</button></>}
           </div>
