@@ -1,5 +1,6 @@
 'use client'
 
+import Header from "@/app/_component/header";
 import Profitloss from "@/app/_component/profitloss";
 import { fetchSingleJournal } from "@/app/redux/journalSlice";
 import { useEffect } from "react";
@@ -15,6 +16,7 @@ const JournalView = (props) =>{
   },[])
   return(
     <>
+    <Header/>
     {journalItems.result ?  <>
     
       <section className="container my-10 mx-auto">
