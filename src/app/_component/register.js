@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../thunks/authThunks";
+import Spinner from "./Spinner";
 
 const Register = () =>{
   
@@ -14,7 +15,7 @@ const Register = () =>{
   const dispatch = useDispatch();
   const router = useRouter();
   const {status,error} = useSelector((state)=>state.auth);
-
+  console.log(status);
 
   const handleSignUp = async (e) =>{
     e.preventDefault();
@@ -35,13 +36,14 @@ const Register = () =>{
     
     dispatch(registerUser({email,password}));
     
-    console.log('status',status);
     if(status === 'succeeded'){
-      router.push('/');
+      router.push('/auth');
     }
   }
 
   return(
+   <>
+  
     <div className="block">
     <div className="mt-10">
     <img
@@ -91,6 +93,8 @@ const Register = () =>{
       </div>
       {error && <p>{error}</p>}
    </div>
+    
+    </>
   )
 }
 

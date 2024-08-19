@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../thunks/authThunks";
+import Spinner from "./Spinner";
 
 const Login = (props) =>{
   const [username,setUsername] = useState('');
@@ -31,6 +32,7 @@ const Login = (props) =>{
   
   return(
     <>
+    {status ==='loading' ? <Spinner/> : 
     <div className="block">
       <div className="mb-10">
         <img className="w-auto h-10 mx-auto mb-10"
@@ -50,6 +52,7 @@ const Login = (props) =>{
       </div>
       <p onClick = {(e)=>props.setLogin(false)}className="text-center text-purple-800 font-medium text-1xl mt-5">Register Here</p>
     </div>
+    }
     </>
   )
 }
