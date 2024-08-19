@@ -19,6 +19,12 @@ export async function POST(request){
     if(result){
       success= true
     }
+  }else{
+    const authData = new authSchema(payload);
+    result = await authData.save();
+    if(result){
+      success = true;
+    }
   }
 
   return NextResponse.json({result,success});

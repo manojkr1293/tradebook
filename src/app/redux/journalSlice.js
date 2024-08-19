@@ -16,7 +16,7 @@ export const fetchSingleJournal = createAsyncThunk('fetchSingleJournal', async (
 })
 
 export const addNewJournal = createAsyncThunk('addNewJournal', async(initialPost)=>{
-  console.log('initialPost', initialPost);
+
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   let response = await fetch(`${apiUrl}api/journal`,{
     method:"post",

@@ -1,31 +1,32 @@
 'use client'
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "../thunks/authThunks";
 
 const Login = (props) =>{
   const [username,setUsername] = useState('');
   const [password, setPassword] = useState('');
   const router = useRouter();
-
-  const handleLogin = async() =>{
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-    let response = await fetch(`${apiUrl}api/auth`,{
-      method:'POST',
-      body:JSON.stringify({username,password,isLogin:true})
-    })
-
-    response = await response.json();
-
-    if(response.success){
-     let {result} = response;
-     if(result){
-      delete result.password;
-      localStorage.setItem('authUser',JSON.stringify(result))
-      router.push('dashboard');
-     }
+  const dispatch = useDispatch();
+  const {status,error,authUserData} = useSelector((state)=>state.auth);
+  
+  const handleLogin = (e) =>{
+    e.preventDefault();
+    dispatch(loginUser({username,password,isLogin:true}));
+ 
+    if(status==='succeeded'){
+      
+      let {result} = authUserData;
+      if(result){
+        const { password, ...userWithoutPassword } = result;
+        localStorage.setItem('authUser',JSON.stringify(userWithoutPassword))
+        router.push('dashboard');
+       }
     }else{
       alert('login failed');
     }
+
   }
   
   return(
