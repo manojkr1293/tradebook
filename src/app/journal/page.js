@@ -21,6 +21,7 @@ const Journal = () =>{
     sellPrice: "",
     stoploss: "",
     quantity: "",
+    referencelink : "",
     strategy: "",
     reason: "",
     notes: "",
@@ -212,6 +213,10 @@ const Journal = () =>{
         setFormValues((prevValues) => ({ ...prevValues, quantity: value }));
         //setQuantity(value);
         break;
+      case "referencelink":
+        setFormValues((prevValues) => ({ ...prevValues, referencelink: value }));
+        //setStrategy(value);
+        break;
       case "strategy":
         errorMessage = validateStrategy(value);
         setErrors({ ...errors, strategy: errorMessage });
@@ -280,7 +285,7 @@ const Journal = () =>{
   const validateForm = () => {
     const newErrors = {};
     const currentRequiredFields = requiredFields[formValues.tradestatus];
-
+    
     currentRequiredFields.forEach((key) => {
       if (!formValues[key]) {
         newErrors[key] = `${
@@ -296,7 +301,7 @@ const Journal = () =>{
   const handleAddToJournal = () => {
     //e.preventDefault();
     const formData = { ...formValues };
-    //console.log(formData);
+    
     if (formValues.tradestatus === "Open") {
       formData.sellPrice = "";
       formData.sellDate = "";
@@ -329,7 +334,7 @@ const Journal = () =>{
           createDate: formattedDate,
           userid:authUser._id
       };
-
+ 
       dispatch(addNewJournal(updatedData));
       //dispatch(journalAction.addToJournal(formattedValues));
       setFormValues(initialFormValues);
@@ -556,6 +561,17 @@ const Journal = () =>{
                 )}
                 <div className="col-span-full">
                   <InputJournal
+                    type="text"
+                    label="Reference Link"
+                    id="referencelink"
+                    value={formValues.referencelink}
+                    onChange={handleChange}
+                    onBlur={handleChange}
+                    error={errors.referencelink}
+                  />
+                </div>
+                <div className="col-span-full">
+                  <InputJournal
                     type="textarea"
                     label="Strategy Used"
                     id="strategy"
@@ -580,7 +596,7 @@ const Journal = () =>{
                   <div className="col-span-full">
                     <InputJournal
                       type="textarea"
-                      label="Notes"
+                      label="Learnings From The Trade"
                       id="notes"
                       value={formValues.notes}
                       onChange={handleChange}

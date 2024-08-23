@@ -10,17 +10,17 @@ export const fetchJournal = createAsyncThunk('fetchJournal', async () => {
 
 export const fetchSingleJournal = createAsyncThunk('fetchSingleJournal', async (journalId) => {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-  console.log(journalId);
+  
   const response = await fetch(`${apiUrl}api/journal/view/${journalId}`)
   return response.json();
 })
 
 export const addNewJournal = createAsyncThunk('addNewJournal', async(initialPost)=>{
-
+  console.log('initialPost',initialPost);
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   let response = await fetch(`${apiUrl}api/journal`,{
     method:"post",
-    body:JSON.stringify({stock_name:initialPost.filterOption,time_frame:initialPost.timeframe,trades_tatus:initialPost.tradestatus,buying_date:initialPost.buyDate,selling_date:initialPost.sellDate,buying_price:initialPost.buyPrice,selling_price:initialPost.sellPrice,stop_loss:initialPost.stoploss,quantity:initialPost.quantity,strategy:initialPost.strategy,reason:initialPost.reason,notes:initialPost.notes,create_date:initialPost.createDate,user_id:initialPost.userid})
+    body:JSON.stringify({stock_name:initialPost.filterOption,time_frame:initialPost.timeframe,trades_tatus:initialPost.tradestatus,buying_date:initialPost.buyDate,selling_date:initialPost.sellDate,buying_price:initialPost.buyPrice,selling_price:initialPost.sellPrice,stop_loss:initialPost.stoploss,quantity:initialPost.quantity,reference_link:initialPost.referencelink,strategy:initialPost.strategy,reason:initialPost.reason,notes:initialPost.notes,create_date:initialPost.createDate,user_id:initialPost.userid})
   })
 
   response = await response.json();

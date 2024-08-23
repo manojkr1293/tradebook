@@ -11,6 +11,7 @@ const journalModel = new mongoose.Schema({
   notes:String,
   stop_loss:String,
   quantity:String,
+  reference_link:String,
   strategy:String,
   reason:String,
   create_date:String,

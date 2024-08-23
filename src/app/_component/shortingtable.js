@@ -85,8 +85,8 @@ const Shortingtable = ({initialData = [] }) =>{
                                 <td className="p-3 border-2 text-gray-900 text-md font-bold">{item.buying_price}</td>
                                 <td className="p-3 border-2 text-gray-900 text-md font-bold">{item.selling_price}</td>
                                 <td className="p-3 border-2 text-gray-900 text-md font-bold">{item.quantity}</td>
-                                <td className="p-3 border-2  text-gray-900 text-md font-bold">
-                                  <Profitloss buyprice = {item.buying_price} sellprice={item.selling_price}/>
+                                <td className="px-3 border-2  text-gray-900 text-md">
+                                  <Profitloss buyprice = {item.buying_price} sellprice={item.selling_price} qty={item.quantity}/>
               </td>
                             </tr>
                         ))
